@@ -7,7 +7,6 @@ import {
   withRouter,
   Redirect
 } from "react-router-dom";
-import { useLocation } from "react-router";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import "./styles.css";
 
