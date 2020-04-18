@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   BrowserRouter,
   Link,
@@ -7,6 +7,7 @@ import {
   withRouter,
   Redirect
 } from "react-router-dom";
+import { useLocation } from "react-router";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import "./styles.css";
 
@@ -33,6 +34,11 @@ const getLevelName = (pathname, level) =>
     ? "/"
     : pathname.split("/").filter(Boolean)[level];
 
+const WatchLastVisited = ({ children, location }) => {
+  useEffect(() => () => console.log(location.pathname), [location]);
+  return <>{children}</>;
+};
+
 const AnimatedSwitch = withRouter(({ location }) => {
   return (
     <TransitionGroup component={null}>
@@ -55,27 +61,31 @@ const AnimatedSwitch = withRouter(({ location }) => {
                 <About>
                   <TransitionGroup component={null}>
                     <CSSTransition
-                      key={getLevelName(location.pathname, 1) || defaultPage}
+                      key={
+                        getLevelName(props.location.pathname, 1) || defaultPage
+                      }
                       classNames="fade"
                       timeout={1000}
                     >
-                      <div className="fade">
-                        <Switch location={location}>
-                          <Redirect
-                            exact
-                            from={props.match.path}
-                            to={`${props.match.path}/${defaultPage}`}
-                          />
-                          <Route
-                            path={`${props.match.path}/about-inner-1`}
-                            component={AboutInner1}
-                          />
-                          <Route
-                            path={`${props.match.path}/about-inner-2`}
-                            component={AboutInner2}
-                          />
-                        </Switch>
-                      </div>
+                      <WatchLastVisited location={props.location}>
+                        <div className="fade">
+                          <Switch location={props.location}>
+                            <Redirect
+                              exact
+                              from={props.match.path}
+                              to={`${props.match.path}/${defaultPage}`}
+                            />
+                            <Route
+                              path={`${props.match.path}/about-inner-1`}
+                              component={AboutInner1}
+                            />
+                            <Route
+                              path={`${props.match.path}/about-inner-2`}
+                              component={AboutInner2}
+                            />
+                          </Switch>
+                        </div>
+                      </WatchLastVisited>
                     </CSSTransition>
                   </TransitionGroup>
                 </About>
