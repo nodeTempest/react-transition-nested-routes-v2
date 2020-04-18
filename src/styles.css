@@ -1,0 +1,85 @@
+body {
+  margin: 0;
+}
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
+  position: relative;
+}
+
+.home {
+  background: darkblue;
+  height: 30vh;
+  color: white;
+}
+
+.topics {
+  background: darkred;
+  height: 30vh;
+  color: white;
+  position: relative;
+}
+
+.about {
+  background: darkgreen;
+  height: 30vh;
+  color: white;
+  position: relative;
+}
+
+.about-inner-1 {
+  background: darkcyan;
+  height: 15vh;
+  color: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.about-inner-2 {
+  background: purple;
+  height: 15vh;
+  color: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.slide-enter {
+  transform: translateX(100%);
+  transition: transform 1000ms ease-out;
+}
+
+.slide-enter.slide-enter-active {
+  transform: translateX(0%);
+}
+
+.slide-exit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transform: translateX(0%);
+  transition: transform 1000ms ease-out;
+}
+
+.slide-exit-active {
+  transform: translateX(-100%);
+}
+
+.fade {
+  position: relative;
+}
+
+.fade-enter {
+  opacity: 0;
+  z-index: 1;
+}
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 1000ms ease-in;
+}
